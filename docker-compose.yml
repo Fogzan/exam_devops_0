@@ -1,5 +1,30 @@
 version: '3'
 services:
+  app:
+    container_name: app
+    hostname: app
+    
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    restart: always
+      
+  mysql_db:
+    container_name: mysql_db
+    hostname: mysql_db
+    image: mysql:8.1.0
+    ports:
+      - "32001:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password123
+      - MYSQL_DATABASE=app
+      - MYSQL_PASSWORD=password123
+      - MYSQL_USER=mainroot
+    volumes:
+      - mysql:/var/lib/mysql
+
   phpmyadmin:
     container_name: phpmyadmin
     hostname: phpmyadmin
@@ -11,34 +36,9 @@ services:
       - 8080:80
     environment:
       - PMA_HOST=mysql_db
-      - MYSQL_USERNAME=mainroot
-      - MYSQL_ROOT_PASSWORD=secret
       - PMA_PORT=3306
-      - PMA_ARBITRARY=1
-      
-  mysql_db:
-    container_name: mysql_db
-    hostname: mysql_db
-    image: mysql:8.1.0
-    ports:
-      - "32001:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=cinema
-      - MYSQL_PASSWORD=secret
-      - MYSQL_USER=mainroot
-    volumes:
-      - mysql:/var/lib/mysql
-
-  wsgi_app:
-    container_name: wsgi_app
-    hostname: wsgi_app
-    build: 
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 5000:5000
-    restart: always
+      - PMA_USER=mainroot
+      - PMA_PASSWORD=password123
 
 volumes:
   mysql:

@@ -19,31 +19,14 @@ metadata = MetaData(naming_convention=convention)
 db = SQLAlchemy(app, metadata=metadata)
 migrate = Migrate(app, db)
 
-from models import Inf, Tickets, create_models
+from models import *
 
 # Создание БД
-# create_models(app)
+create_models(app)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    films = Inf.query.all()
-    return render_template('index.html', films = films) 
-
-@app.route('/ticket', methods=['GET', 'POST'])
-def ticket():
-    ticket = {}
-    film = {}
-    ticket_id = None
     if request.method == 'POST':
-        ticket_id = request.form.get('ticketInput')
-        ticket = Tickets.query.get(ticket_id)
-        if not ticket:
-            flash('Билета с таким id не существует.', 'danger')
-            return render_template('tickets.html', ticket = ticket, ticket_id=ticket_id, film = film) 
-        else:
-            flash('Билет успешно найден.', 'success')
-        film = Inf.query.filter(Inf.title == ticket.title).one()
-        if not film:
-            flash('Ошибка в заполнении БД.', 'danger')
-            
-    return render_template('tickets.html', ticket = ticket, ticket_id = ticket_id, film = film) 
+        return render_template('index.html') 
+
+    return render_template('index.html') 

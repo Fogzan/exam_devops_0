@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
-    <title>Электронная библиотека</title>
+    <title>Сайт для экзамена</title>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -20,11 +20,8 @@
             <div class="container-fluid">
                 <div class="navbar-brand">
                     <a href="{{ url_for('index') }}">
-                        <img class="img-fluid" src="{{ url_for('static', filename='images/logo.png') }}" alt="">
+                        Главная
                     </a>
-                </div>
-                <div class="navbar-brand">
-                    <a href="{{ url_for('ticket') }}" class="none-class">Посмотреть информацию о фильме</a>
                 </div>
             </div>
         </nav>
@@ -47,7 +44,7 @@
     </main>
 
     <footer class="bg-dark text-white d-flex align-items-center justify-content-center py-3">
-        &copy; "Кинотеатр"
+        Создатель приложения: Савельев Михаил Артемович. Группа: 211-352
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
