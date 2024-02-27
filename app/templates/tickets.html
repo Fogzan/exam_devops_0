@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h1 class="title my-3 font-weight-bold text-center text-black">Просмотр информации о билете</h1>
+<div class="container">
+    <form action="" method="post">
+        <div class="form-floating mb-2">
+            <input type="text" class="form-control" id="floatingInput" placeholder="" name="ticketInput"
+                value="{% if ticket_id %}{{ ticket_id }}{% endif %}">
+            <label for="floatingInput">Номер билета</label>
+        </div>
+        <button class="btn btn-primary mb-2" type="submit">Найти</button>
+    </form>
+    {% if ticket and film %}
+
+    <div class="h-100 text-center d-flex p-3">
+        <div class="m-auto">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Название фильма</th>
+                        <th scope="col">Начало сеанса</th>
+                        <th scope="col">Продолжительность</th>
+                        <th scope="col">Место</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="book-title">{{ film.title }}</td>
+                        <td>{{ ticket.time_start }}</td>
+                        <td>{{ film.duration }}</td>
+                        <td>{{ ticket.place }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+
+    {% endblock %}
